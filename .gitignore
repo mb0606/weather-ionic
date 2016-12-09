@@ -13,6 +13,7 @@ log.txt
 npm-debug.log*
 
 .idea/
+key.config.ts
 .sass-cache/
 .tmp/
 .versions/

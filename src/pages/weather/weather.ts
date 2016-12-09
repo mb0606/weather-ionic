@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import {WeatherService} from "../../app/services/weather.service";
 
 
 
@@ -22,6 +23,7 @@ import { Component } from '@angular/core'
 
 export class WeatherComponent {
 
+  constructor(private weatherService: WeatherService){}
 
 
 }

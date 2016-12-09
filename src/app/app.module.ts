@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import {WeatherComponent} from "../pages/weather/weather";
 import {SettingsComponent} from "../pages/settings/settings";
+import {WeatherService} from "./services/weather.service";
 
 @NgModule({
   declarations: [
@@ -31,6 +32,6 @@ import {SettingsComponent} from "../pages/settings/settings";
     WeatherComponent,
     SettingsComponent
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, WeatherService]
 })
 export class AppModule {}
