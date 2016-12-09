@@ -6,6 +6,7 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import {WeatherComponent} from "../pages/weather/weather";
+import {SettingsComponent} from "../pages/settings/settings";
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import {WeatherComponent} from "../pages/weather/weather";
     ContactPage,
     HomePage,
     TabsPage,
-    WeatherComponent
+    WeatherComponent,
+    SettingsComponent
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -26,7 +28,8 @@ import {WeatherComponent} from "../pages/weather/weather";
     ContactPage,
     HomePage,
     TabsPage,
-    WeatherComponent
+    WeatherComponent,
+    SettingsComponent
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
