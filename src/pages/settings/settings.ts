@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {WeatherService} from "../../app/services/weather.service";
 import { NavController } from 'ionic-angular';
 import {WeatherComponent} from "../weather/weather";
-import {isUndefined} from "ionic-angular/util/util";
 
 @Component({
   selector: 'my-settings',
@@ -27,7 +26,10 @@ import {isUndefined} from "ionic-angular/util/util";
                  </ion-item>
                  <p *ngIf="defaultCity" class="current">Current City: {{defaultCity}}</p>
                  <button (click)="saveChanges()" ion-button color="light" block>Save Changes</button>
-                </ion-list>   
+                </ion-list>  
+                 <h5>We have guested you current location click on it if you would like to make it your default city. <span>
+                  If not find city above.
+                  </span></h5>
                 <ion-list>
                   <ion-item *ngFor="let result of results">
                     <span (click)="setDefaultCity(result)">{{result.name}} </span> 
@@ -45,9 +47,15 @@ export class SettingsComponent implements OnInit {
     results:any;
     defaultCity:any;
     searchStr: string;
+    lat:string;
+    lng:string;
+    geoLocation:string;
 
     constructor(private navCtl: NavController,
-                private weatherService: WeatherService){}
+                private weatherService: WeatherService){
+
+
+    }
 
     ngOnInit(){
       this.getDefaultCity()
@@ -63,17 +71,32 @@ export class SettingsComponent implements OnInit {
   }
 
   getDefaultCity(){
-    if(localStorage.getItem("city") !== undefined ){
+    if(localStorage.getItem("city") !== undefined &&  localStorage.getItem("city") !== null){
       this.defaultCity = JSON.parse(localStorage.getItem("city")).name;
     } else {
-      this.defaultCity= '';
+
+      this.weatherService.getCurrentPosition().subscribe(
+        position => {
+          this.lat = "" + position.coords.latitude;
+          this.lng = "" + position.coords.longitude;
+          console.log(this.lat, this.lng)
+          this.weatherService.getCity(this.lat, this.lng).subscribe(
+            data => {
+              this.getQuery(data.results[0].address_components[2].long_name);
+
+            }
+          )
+        }
+      )
+
+      // this.defaultCity= '';
     }
 
   }
 
   setDefaultCity(city){
     this.results = [];
-    if(typeof(Storage) !== "undefined"){
+    if(typeof(Storage) !== "undefined") {
       localStorage.setItem("city", JSON.stringify(city));
       this.searchStr = city.name;
       this.getDefaultCity();

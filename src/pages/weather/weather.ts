@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import {WeatherService} from "../../app/services/weather.service";
+import {NavController} from "ionic-angular/index";
+import {SettingsComponent} from "../settings/settings";
 
 
 
@@ -81,7 +83,8 @@ export class WeatherComponent implements OnInit {
   city = 'Boston';
   state = 'MA';
 
-  constructor(private weatherService: WeatherService){}
+  constructor(private navCtrl: NavController,
+              private weatherService: WeatherService){}
 
   ngOnInit(){
     this.getDefaultCity()
@@ -112,11 +115,11 @@ export class WeatherComponent implements OnInit {
 
   }
   getDefaultCity(){
-    if(localStorage.getItem("city") !== undefined ) {
+    if(localStorage.getItem("city") !== undefined &&  localStorage.getItem("city") !== null) {
       this.zmw = JSON.parse(localStorage.getItem("city")).zmw;
       console.log("this is the zmw", this.zmw)
     } else {
-      this.zmw = "90001.1.99999"
+      this.navCtrl.push(SettingsComponent);
     }
   }
 
