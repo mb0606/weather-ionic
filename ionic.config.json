@@ -6,7 +6,11 @@
   "proxies": [
     {
       "path": "/api",
-      "proxyUrl": "http://192.168.1.1"
+      "proxyUrl": "http://api.wunderground.com/api"
+    },
+    {
+      "path":"/search",
+      "proxyUrl": "http://autocomplete.wunderground.com/search"
     }
   ]
 }
