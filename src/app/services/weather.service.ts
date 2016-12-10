@@ -14,5 +14,10 @@ export class WeatherService {
   constructor(private http: Http) {
   }
 
+  getWeather(city, state){
+    return this.http.get(`http://api.wunderground.com/api/${API_KEY}/conditions/q/` + state + '/' + city + '.json')
+      .map(res => res.json());
+  }
+
 
 }

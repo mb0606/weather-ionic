@@ -2,5 +2,11 @@
   "name": "myweather",
   "app_id": "",
   "v2": true,
-  "typescript": true
+  "typescript": true,
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "http://192.168.1.1"
+    }
+  ]
 }
